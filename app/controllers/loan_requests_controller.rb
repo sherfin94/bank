@@ -14,6 +14,10 @@ class LoanRequestsController < ApplicationController
     @loan_request = LoanRequest.create(loan_request_params)
     @loan_request.request_time = Time.now
     @loan_request.save!
+
+    respond_to do |format|
+      format.html { render :processing }
+    end
   end
 
   private
