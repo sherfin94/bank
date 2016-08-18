@@ -20,6 +20,11 @@ class LoanRequestsController < ApplicationController
     end
   end
 
+  def progress
+    loan_request = LoanRequest.find(params[:id])
+    render json: {progress: loan_request.progress}
+  end
+
   private
 
   def loan_request_params
