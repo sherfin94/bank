@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/sherfin94/bank/badges/gpa.svg)](https://codeclimate.com/github/sherfin94/bank)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
