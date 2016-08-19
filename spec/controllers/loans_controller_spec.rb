@@ -46,4 +46,17 @@ RSpec.describe LoansController, type: :controller do
       expect(parsed['progress']).to eq(50)
     end
   end
+
+  context 'When a new Loan is created' do
+    it 'sets the status as pending' do
+      post :create, params: {
+        loan: {
+          borrower_name: 'sherfin',
+          loan_number: '12'
+        }
+      }
+      loan = Loan.find_by(borrower_name: 'sherfin')
+      expect(loan.status).to eq('pending')
+    end
+  end
 end

@@ -13,6 +13,7 @@ class LoansController < ApplicationController
   def create
     @loan = Loan.create(loan_request_params)
     @loan.request_time = Time.now
+    @loan.status = 'pending'
     @loan.save!
 
     respond_to do |format|
@@ -23,6 +24,10 @@ class LoansController < ApplicationController
   def progress
     loan_request = Loan.find(params[:id])
     render json: { progress: loan_request.progress }
+  end
+
+  def payment_schedule
+    render :payment_schedule
   end
 
   private
