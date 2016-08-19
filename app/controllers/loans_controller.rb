@@ -1,19 +1,19 @@
-class LoanRequestsController < ApplicationController
+class LoansController < ApplicationController
   def index
-    @loan_requests = LoanRequest.all
+    @loans = Loan.all
   end
 
   def show
   end
 
   def new
-    @loan_request = LoanRequest.new
+    @loan = Loan.new
   end
 
   def create
-    @loan_request = LoanRequest.create(loan_request_params)
-    @loan_request.request_time = Time.now
-    @loan_request.save!
+    @loan = Loan.create(loan_request_params)
+    @loan.request_time = Time.now
+    @loan.save!
 
     respond_to do |format|
       format.html { render :processing }
@@ -21,14 +21,14 @@ class LoanRequestsController < ApplicationController
   end
 
   def progress
-    loan_request = LoanRequest.find(params[:id])
+    loan_request = Loan.find(params[:id])
     render json: { progress: loan_request.progress }
   end
 
   private
 
   def loan_request_params
-    params.require(:loan_request)
+    params.require(:loan)
           .permit(
             :borrower_name,
             :loan_number,

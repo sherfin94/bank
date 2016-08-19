@@ -1,4 +1,4 @@
-class LoanRequest < ApplicationRecord
+class Loan < ApplicationRecord
   def progress
     ((Time.now - self.request_time) * 10).round
   end

@@ -1,0 +1,8 @@
+<h1>LoanRequests</h1>
+
+<% @loans.each do |loan|%>
+  Borrower Name : <%= loan.borrower_name %> <br />
+  Loan number : <%= loan.loan_number %> <br />
+  interest rate : <%= loan.interest_rate %> <br />
+  Request date time : <%= loan.request_time %> <br />
+<% end %>

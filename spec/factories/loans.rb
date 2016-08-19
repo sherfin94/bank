@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :loan_request do
+  factory :loan do
     borrower_name "MyString"
     loan_number 1
     principal_loan_amount 1.5

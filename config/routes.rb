@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  get 'loan_requests/index'
+  get 'loans/index'
 
-  get 'loan_requests/show'
+  get 'loans/show'
 
-  get 'loan_requests/new'
+  get 'loans/new'
 
-  resources :loan_requests
+  resources :loans
 
-  post 'loan_requests/progress'
+  post 'loans/progress'
 
-  root 'loan_requests#new'
+  root 'loans#new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
