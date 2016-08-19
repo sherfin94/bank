@@ -1,7 +1,20 @@
 <script>
   loanRequestid = <%= @loan_request.id %>
-</script>
+  function receivedProgress(data) {
+    if(data.progress >= 100) {
+      window.location = '/loan_requests/new'
+    }
+  }
 
+  setInterval(function() {
+    $.ajax({
+      type: 'POST',
+      url: '/loan_requests/progress',
+      success: receivedProgress,
+      data: {'id': loanRequestid}
+    })
+  }, 1000)
+</script>
 <div id = "loading-bar">
   Processing Loan
 </div>

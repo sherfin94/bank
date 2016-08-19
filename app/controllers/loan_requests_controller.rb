@@ -22,7 +22,7 @@ class LoanRequestsController < ApplicationController
 
   def progress
     loan_request = LoanRequest.find(params[:id])
-    render json: {progress: loan_request.progress}
+    render json: { progress: loan_request.progress }
   end
 
   private
@@ -38,6 +38,6 @@ class LoanRequestsController < ApplicationController
             :interest_rate,
             :term,
             :loan_type
-    )
+          )
   end
 end
