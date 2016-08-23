@@ -27,17 +27,23 @@ RSpec.describe LoansController, type: :controller do
     it 'stores the request' do
       post :create, params: {
         loan: {
-          borrower_name: 'sherfin',
-          loan_number: '12'
+          borrower_name: "MyString",
+          loan_number: 1,
+          principal_loan_amount: 1.5,
+          closing_date: "2016-08-17 13:14:31",
+          first_payment_date: "2016-06-17 13:14:31",
+          interest_rate: 1.5,
+          term: 1,
+          loan_type: "MyString"
         }
       }
-      expect(Loan.find_by!(borrower_name:'sherfin')).not_to eq(nil)
+      expect(Loan.find_by!(borrower_name:'MyString')).not_to eq(nil)
     end
   end
 
   context 'progress API' do
     it 'returns the progress of the requested loan request' do
-      loan = Loan.create!(request_time: Time.now - 5)
+      loan = FactoryGirl.create(:loan,request_time: Time.now - 5)
       post :progress, params: {
         id: loan.id
       }
@@ -51,11 +57,17 @@ RSpec.describe LoansController, type: :controller do
     it 'sets the status as pending' do
       post :create, params: {
         loan: {
-          borrower_name: 'sherfin',
-          loan_number: '12'
+          borrower_name: "MyString",
+          loan_number: 1,
+          principal_loan_amount: 1.5,
+          closing_date: "2016-08-17 13:14:31",
+          first_payment_date: "2016-06-17 13:14:31",
+          interest_rate: 1.5,
+          term: 1,
+          loan_type: "MyString"
         }
       }
-      loan = Loan.find_by(borrower_name: 'sherfin')
+      loan = Loan.find_by(borrower_name: 'MyString')
       expect(loan.status).to eq('pending')
     end
   end
