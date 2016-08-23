@@ -1,16 +1,18 @@
-<h1>LoanRequests#new</h1>
-<p>Find me in app/views/loan_requests/new.html.erb</p>
+<div class = "container">
+<h1>Request for a loan</h1>
 
-<%= semantic_form_for @loan do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :borrower_name %>
-    <%= f.input :loan_number %>
-    <%= f.input :principal_loan_amount %>
-    <%= f.input :closing_date %>
-    <%= f.input :first_payment_date %>
-    <%= f.input :interest_rate %>
-    <%= f.input :term %>
-    <%= f.input :loan_type, as: :radio, collection: ['Business Loan', 'Personal Loan'] %>
+
+  <%= semantic_form_for @loan do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :borrower_name %>
+      <%= f.input :loan_number %>
+      <%= f.input :principal_loan_amount %>
+      <%= f.input :closing_date %>
+      <%= f.input :first_payment_date %>
+      <%= f.input :interest_rate %>
+      <%= f.input :term %>
+      <%= f.input :loan_type, as: :radio, collection: ['Business Loan', 'Personal Loan'] %>
+    <% end %>
+    <%= f.actions %>
   <% end %>
-  <%= f.actions %>
-<% end %>
+</div>
