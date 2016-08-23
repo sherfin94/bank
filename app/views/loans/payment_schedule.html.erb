@@ -1,13 +1,14 @@
 <h1 class = 'title'>Payment Schedule</h1>
 
-<table>
+<table cellspacing="20px">
 <% @loan.payments.each do |payment| %>
   <tr>
     <td> <%= payment.payment_date %> </td>
-    <td> <%= payment.beginning_balance %> </td>
-    <td> <%= payment.principal_payment %> </td>
-    <td> <%= payment.total_payment %> </td>
-    <td> <%= payment.ending_balance %> </td>
+    <td> <%= payment.beginning_balance.round(2) %> </td>
+    <td> <%= payment.principal_payment.round(2) %> </td>
+    <td> <%= payment.total_payment.round(2) %> </td>
+    <td> <%= payment.total_payment - payment.principal_payment %> </td>
+    <td> <%= payment.ending_balance.round(2) %> </td>
   </tr>
 <% end %>
 </table>
