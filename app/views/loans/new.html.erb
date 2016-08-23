@@ -1,7 +1,10 @@
 <div class = "container">
 <h1>Request for a loan</h1>
-
-
+  <% if flash[:alert] %>
+    <div class = "well" id = "error">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
   <%= semantic_form_for @loan do |f| %>
     <%= f.inputs do %>
       <%= f.input :borrower_name %>

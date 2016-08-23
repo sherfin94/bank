@@ -14,10 +14,13 @@ class LoansController < ApplicationController
     @loan = Loan.create(loan_request_params)
     @loan.request_time = Time.now
     @loan.status = 'pending'
-    @loan.save!
 
     respond_to do |format|
-      format.html { render :processing }
+      if @loan.save
+        format.html { render :processing }
+      else
+        format.html { redirect_to root_path, alert: 'Invalid form response'}
+      end
     end
   end
 
