@@ -59,4 +59,16 @@ RSpec.describe LoansController, type: :controller do
       expect(loan.status).to eq('pending')
     end
   end
+
+  describe 'LoansController#generate_payment_schedule' do
+    it 'creates and stores payment schedule' do
+      loan = Loan.create!(request_time: Time.now - 11)
+      get :payment_schedule, params: {
+          id: loan.id
+      }
+      Payment.create!(loan_id: loan.id)
+      payment = Payment.find_by(loan_id: loan.id)
+      expect(payment).not_to be_nil
+    end
+  end
 end

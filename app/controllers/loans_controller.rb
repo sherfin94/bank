@@ -27,6 +27,7 @@ class LoansController < ApplicationController
   end
 
   def payment_schedule
+    @loan = Loan.find(params[:id])
     render :payment_schedule
   end
 
