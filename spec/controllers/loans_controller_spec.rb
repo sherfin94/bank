@@ -60,15 +60,23 @@ RSpec.describe LoansController, type: :controller do
     end
   end
 
-  describe 'LoansController#generate_payment_schedule' do
+  describe 'LoansController#payment_schedule' do
     it 'creates and stores payment schedule' do
-      loan = Loan.create!(request_time: Time.now - 11)
+      loan = FactoryGirl.create(:loan, request_time: Time.now - 11)
       get :payment_schedule, params: {
-          id: loan.id
+        id: loan.id
       }
-      Payment.create!(loan_id: loan.id)
       payment = Payment.find_by(loan_id: loan.id)
       expect(payment).not_to be_nil
+    end
+
+    it 'creates one payment in the case of one month duration' do
+      loan = FactoryGirl.create(:loan, first_payment_date: 2.month.ago, closing_date: 1.month.ago)
+      get :payment_schedule, params: {
+        id: loan.id
+      }
+      payment = Payment.find_by(loan_id: loan.id)
+      expect(payment.loan.loan_number).to eq(loan.loan_number)
     end
   end
 end
