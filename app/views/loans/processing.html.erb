@@ -4,6 +4,7 @@
     if(data.progress >= 100) {
       window.location = '/loans/payment_schedule/' + loanRequestid
     }
+    $('#progress-bar').attr('aria-valuenow', data.progress).width(data.progress+'%');
   }
 
   setInterval(function() {
@@ -15,6 +16,13 @@
     })
   }, 1000)
 </script>
-<div id = "loading-bar">
-  Processing Loan
+<br /><br />
+<div id = "loading-bar" class = "container">
+  <h1> Processing your request </h1>
+  <br />
+  <div class="progress">
+    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"
+    aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id = "progress-bar" style="width:0%">
+    </div>
+  </div>
 </div>
