@@ -1,14 +1,26 @@
-<h1 class = 'title'>Payment Schedule</h1>
 
-<table cellspacing="20px">
-<% @loan.payments.each do |payment| %>
-  <tr>
-    <td> <%= payment.payment_date %> </td>
-    <td> <%= payment.beginning_balance.round(2) %> </td>
-    <td> <%= payment.principal_payment.round(2) %> </td>
-    <td> <%= payment.total_payment.round(2) %> </td>
-    <td> <%= payment.total_payment - payment.principal_payment %> </td>
-    <td> <%= payment.ending_balance.round(2) %> </td>
-  </tr>
-<% end %>
-</table>
+<div class = "container">
+  <br />
+  <h1 class = 'title'>Payment Schedule for <%= @loan.borrower_name %></h1>
+  <br />
+  <table class = "table table-striped">
+    <tr>
+      <th> Payment date </th>
+      <th> Beginning balance </th>
+      <th> Principal payment </th>
+      <th> Interest rate </th>
+      <th> Total payment </th>
+      <th> Ending Balance </th>
+    </tr>
+  <% @loan.payments.each do |payment| %>
+    <tr>
+      <td> <%= payment.payment_date %> </td>
+      <td> <%= payment.beginning_balance.round(2) %> </td>
+      <td> <%= payment.principal_payment.round(2) %> </td>
+      <td> <%= (payment.total_payment - payment.principal_payment).round(2) %> </td>
+      <td> <%= payment.total_payment.round(2) %> </td>
+      <td> <%= payment.ending_balance.round(2) %> </td>
+    </tr>
+  <% end %>
+  </table>
+</div>
