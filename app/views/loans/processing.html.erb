@@ -2,7 +2,7 @@
   loanRequestid = <%= @loan.id %>
   function receivedProgress(data) {
     if(data.progress >= 100) {
-      window.location = '/loans/new'
+      window.location = '/loans/payment_schedule/' + loanRequestid
     }
   }
 
