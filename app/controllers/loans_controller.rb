@@ -17,6 +17,7 @@ class LoansController < ApplicationController
 
     respond_to do |format|
       if @loan.save
+        session[:id] = @loan.id
         format.html { render :processing }
       else
         format.html { redirect_to root_path, alert: 'Invalid form response'}
@@ -30,7 +31,7 @@ class LoansController < ApplicationController
   end
 
   def payment_schedule
-    @loan = Loan.find(params[:id])
+    @loan = Loan.find(session[:id])
     if @loan.payments.length.zero?
       generate_payment_schedule
     end
