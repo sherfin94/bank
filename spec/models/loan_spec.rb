@@ -7,28 +7,11 @@ RSpec.describe Loan, type: :model do
       expect(someGuy.progress).to eq(50)
     end
 
-    it 'cannot be created without name' do
-      expect {FactoryGirl.create(:loan, borrower_name: nil)}.to raise_error ActiveRecord::RecordInvalid
-    end
-
-    it 'cannot be created without principal amount' do
-      expect {FactoryGirl.create(:loan, principal_loan_amount: nil)}.to raise_error ActiveRecord::RecordInvalid
-    end
-
-    it 'cannot be created without loan number' do
-      expect {FactoryGirl.create(:loan, loan_number: nil)}.to raise_error ActiveRecord::RecordInvalid
-    end
-
-    it 'cannot be created without first payment date' do
-      expect {FactoryGirl.create(:loan, first_payment_date: nil)}.to raise_error ActiveRecord::RecordInvalid
-    end
-
-    it 'cannot be created without first payment date' do
-      expect {FactoryGirl.create(:loan, interest_rate: nil)}.to raise_error ActiveRecord::RecordInvalid
-    end
-
-    it 'cannot be created without first payment date' do
-      expect {FactoryGirl.create(:loan, term: nil)}.to raise_error ActiveRecord::RecordInvalid
-    end
+    it { should validate_presence_of :borrower_name }
+    it { should validate_presence_of :principal_loan_amount }
+    it { should validate_presence_of :loan_number }
+    it { should validate_presence_of :first_payment_date }
+    it { should validate_presence_of :interest_rate }
+    it { should validate_presence_of :term }
   end
 end
