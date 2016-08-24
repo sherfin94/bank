@@ -27,7 +27,7 @@ class LoansController < ApplicationController
   end
 
   def progress
-    loan_request = Loan.find(params[:id])
+    loan_request = Loan.find(session[:id])
     render json: { progress: loan_request.progress }
   end
 
@@ -58,7 +58,7 @@ class LoansController < ApplicationController
   def generate_payment_schedule
     @first_payment_date = @loan.first_payment_date
     @final_date = @first_payment_date + @loan.term.years
-    @rate = @loan.interest_rate/100
+    @rate = @loan.interest_rate / 100
     @principal_loan_amount = @loan.principal_loan_amount
     @current_date = @first_payment_date
     while @current_date < @final_date

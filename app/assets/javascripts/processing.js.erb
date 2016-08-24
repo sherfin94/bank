@@ -1,0 +1,17 @@
+function receivedProgress(data) {
+    if(data.progress >= 100) {
+      window.location = '/loans/payment_schedule/'
+    }
+    $('#progress-bar').attr('aria-valuenow', data.progress).width(data.progress+'%');
+  }
+  $(function() {
+if ($('.progress').length) {
+    setInterval(function() {
+      $.ajax({
+        type: 'POST',
+        url: '/loans/progress',
+        success: receivedProgress
+      })
+    }, 1000)
+  }
+})

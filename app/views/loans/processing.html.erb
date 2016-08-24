@@ -1,21 +1,4 @@
-<script>
-  loanRequestid = <%= @loan.id %>
-  function receivedProgress(data) {
-    if(data.progress >= 100) {
-      window.location = '/loans/payment_schedule/'
-    }
-    $('#progress-bar').attr('aria-valuenow', data.progress).width(data.progress+'%');
-  }
-
-  setInterval(function() {
-    $.ajax({
-      type: 'POST',
-      url: '/loans/progress',
-      success: receivedProgress,
-      data: {'id': loanRequestid}
-    })
-  }, 1000)
-</script>
+<% javascript_include_tag 'loading-screen' %>
 <br /><br />
 <div id = "loading-bar" class = "container">
   <h1> Processing your request </h1>
