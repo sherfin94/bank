@@ -20,6 +20,7 @@ class LoansController < ApplicationController
         session[:id] = @loan.id
         format.html { render :processing }
       else
+        flash[:error] = @loan.errors.full_messages
         format.html { redirect_to root_path, alert: 'Invalid form response'}
       end
     end

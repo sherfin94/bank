@@ -22,4 +22,10 @@ context 'on submit' do
     click_button 'Create Loan'
     expect(page).to have_selector('#error')
   end
+
+  it 'shows error messages corresponding to each submission error' do
+    visit '/loans/new'
+    click_button 'Create Loan'
+    expect(page).to have_text('Borrower name can\'t be blank')
+  end
 end

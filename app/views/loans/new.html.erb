@@ -2,7 +2,11 @@
 <h1>Request for a loan</h1>
   <% if flash[:alert] %>
     <div class = "well" id = "error">
-      <%= flash[:alert] %>
+      <ul>
+        <% flash[:error] and flash[:error].each  do |error| %>
+          <li> <%= error %> </li>
+        <% end %>
+      </ul>
     </div>
   <% end %>
   <%= semantic_form_for @loan do |f| %>
