@@ -2,7 +2,7 @@
   loanRequestid = <%= @loan.id %>
   function receivedProgress(data) {
     if(data.progress >= 100) {
-      window.location = '/loans/payment_schedule/' + loanRequestid
+      window.location = '/loans/payment_schedule/'
     }
     $('#progress-bar').attr('aria-valuenow', data.progress).width(data.progress+'%');
   }

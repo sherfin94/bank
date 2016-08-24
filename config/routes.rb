@@ -5,11 +5,11 @@ Rails.application.routes.draw do
 
   get 'loans/new'
 
-  resources :loans
+  #resources :loans
 
   post 'loans/progress'
-
-  get 'loans/payment_schedule/:id', to: 'loans#payment_schedule'
+  post 'loans', to: 'loans#create'
+  get 'loans/payment_schedule/', to: 'loans#payment_schedule'
 
   root 'loans#new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
