@@ -44,6 +44,7 @@ RSpec.describe LoansController, type: :controller do
   context 'progress API' do
     it 'returns the progress of the requested loan request' do
       loan = FactoryGirl.create(:loan,request_time: Time.now - 5)
+      session[:id] = loan.id
       post :progress, params: {
         id: loan.id
       }
