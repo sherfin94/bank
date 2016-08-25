@@ -14,10 +14,19 @@ class LoansController < ApplicationController
     @loan = Loan.create(loan_request_params)
     @loan.request_time = Time.now
     @loan.status = 'pending'
+    session[:id] = @loan.id
+    workerThread = Thread.new do
+      Thread.current[:progress] = 0
+      while Thread.current[:progress] < 100
+        sleep(1)
+        Thread.current[:progress] += 10
+      end
+      @loan.save
+    end
 
     respond_to do |format|
-      if @loan.save
-        session[:id] = @loan.id
+      if @loan.valid?
+        session[:worker_thread_id] = workerThread.object_id
         format.html { render :processing }
       else
         flash[:error] = @loan.errors.full_messages
@@ -27,8 +36,8 @@ class LoansController < ApplicationController
   end
 
   def progress
-    loan_request = Loan.find(session[:id])
-    render json: { progress: loan_request.progress }
+    workerThread = ObjectSpace._id2ref(session[:worker_thread_id])
+    render json: { progress: workerThread[:progress] }
   end
 
   def payment_schedule
