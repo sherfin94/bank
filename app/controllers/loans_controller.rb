@@ -68,9 +68,8 @@ class LoansController < ApplicationController
     @rate = @loan.interest_rate / 100
     @principal_loan_amount = @loan.principal_loan_amount
     @current_date = @first_payment_date
-    while @current_date < @final_date
+    for_each_month_between(@current_date, @final_date) do |_month|
       calculate_and_create_payment
-      @current_date = @current_date.next_month
     end
   end
 
@@ -101,5 +100,13 @@ class LoansController < ApplicationController
       total_payment: @total_payment,
       ending_balance: @principal_loan_amount - @total_payment
     )
+  end
+
+  def for_each_month_between(start_date, end_date)
+    start_date = start_date.to_date
+    end_date = end_date.to_date
+    ((start_date..end_date).select { |d| d.day == 1 }).each do |month|
+      yield month
+    end
   end
 end

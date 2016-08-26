@@ -115,4 +115,16 @@ RSpec.describe LoansController, type: :controller do
     # sleep(10.5)
     expect(Loan.find_by(borrower_name: 'MyString').loan_number).to eq(1)
   end
+
+  #  describe 'for_each_month_between' do
+  #    it 'iterates over each month between the dates given' do
+  #      a = Date.today
+  #      b = Date.today.next_month.next_month
+  #      current_date = Date.today
+  #      LoansController.for_each_month_between(a, b) do |month_first_date|
+  #        expect(current_date.month).to eq(month_first_date.month)
+  #        current_date = current_date.next_month
+  #      end
+  #    end
+  #  end
 end
