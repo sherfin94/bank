@@ -1,6 +1,22 @@
 require 'rails_helper'
 
+def post_sample_request
+  post :create, params: {
+    loan: {
+      borrower_name: 'MyString',
+      loan_number: 1,
+      principal_loan_amount: 1.5,
+      closing_date: '2016-08-17 13:14:31',
+      first_payment_date: '2016-06-17 13:14:31',
+      interest_rate: 1.5,
+      term: 1,
+      loan_type: 'MyString'
+    }
+  }
+end
+
 RSpec.describe LoansController, type: :controller do
+
   describe 'GET #index' do
     it 'returns http success' do
       get :index
@@ -24,18 +40,7 @@ RSpec.describe LoansController, type: :controller do
 
   context 'Upon request submission' do
     it 'stores the request' do
-      post :create, params: {
-        loan: {
-          borrower_name: 'MyString',
-          loan_number: 1,
-          principal_loan_amount: 1.5,
-          closing_date: '2016-08-17 13:14:31',
-          first_payment_date: '2016-06-17 13:14:31',
-          interest_rate: 1.5,
-          term: 1,
-          loan_type: 'MyString'
-        }
-      }
+      post_sample_request
       expect(Loan.find_by!(borrower_name: 'MyString')).not_to eq(nil)
     end
   end
@@ -56,18 +61,7 @@ RSpec.describe LoansController, type: :controller do
   context 'When a new Loan is created' do
     it 'sets the status as pending' do
       # allow(Thread).to receive(:sleep)
-      post :create, params: {
-        loan: {
-          borrower_name: 'MyString',
-          loan_number: 1,
-          principal_loan_amount: 1.5,
-          closing_date: '2016-08-17 13:14:31',
-          first_payment_date: '2016-06-17 13:14:31',
-          interest_rate: 1.5,
-          term: 1,
-          loan_type: 'MyString'
-        }
-      }
+      post_sample_request
       # allow(Thread).to receive(:sleep).and_call_original
       # sleep(1)
       loan = Loan.find_by(borrower_name: 'MyString')
@@ -103,56 +97,22 @@ RSpec.describe LoansController, type: :controller do
 
   it 'stores the loan id in the session' do
     allow(Thread).to receive(:sleep)
-    post :create, params: {
-      loan: {
-        borrower_name: 'MyString',
-        loan_number: 1,
-        principal_loan_amount: 1.5,
-        closing_date: '2016-08-17 13:14:31',
-        first_payment_date: '2016-06-17 13:14:31',
-        interest_rate: 1.5,
-        term: 1,
-        loan_type: 'MyString'
-      }
-    }
-
+    post_sample_request
     loan = Loan.find(session[:id])
     expect(loan.borrower_name).to eq('MyString')
   end
 
   it 'starts a thread when create action is requested' do
     allow(Thread).to receive(:new)
-    post :create, params: {
-      loan: {
-        borrower_name: 'MyString',
-        loan_number: 1,
-        principal_loan_amount: 1.5,
-        closing_date: '2016-08-17 13:14:31',
-        first_payment_date: '2016-06-17 13:14:31',
-        interest_rate: 1.5,
-        term: 1,
-        loan_type: 'MyString'
-      }
-    }
+    post_sample_request
     expect(Thread).to have_received(:new)
   end
 
   it 'saves the loan object created' do
     allow(Thread).to receive(:new)
-    post :create, params: {
-      loan: {
-        borrower_name: 'MyString',
-        loan_number: 10,
-        principal_loan_amount: 1.5,
-        closing_date: '2016-08-17 13:14:31',
-        first_payment_date: '2016-06-17 13:14:31',
-        interest_rate: 1.5,
-        term: 1,
-        loan_type: 'MyString'
-      }
-    }
+    post_sample_request
     allow(Thread).to receive(:sleep)
     # sleep(10.5)
-    expect(Loan.find_by(borrower_name: 'MyString').loan_number).to eq(10)
+    expect(Loan.find_by(borrower_name: 'MyString').loan_number).to eq(1)
   end
 end
