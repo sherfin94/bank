@@ -17,8 +17,8 @@
       <%= f.input :borrower_name %>
       <%= f.input :loan_number %>
       <%= f.input :principal_loan_amount %>
-      <%= f.input :closing_date %>
-      <%= f.input :first_payment_date %>
+      <%= f.input :closing_date, as: :date_picker %>
+      <%= f.input :first_payment_date, as: :date_picker %>
       <%= f.input :interest_rate %>
       <%= f.input :term %>
       <%= f.input :loan_type, as: :radio, collection: ['Business Loan', 'Personal Loan'] %>
